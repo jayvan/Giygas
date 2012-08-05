@@ -14,7 +14,7 @@ def crawl_prices
   login_form.field_with(:name => "email").value = ENV['GW2_EMAIL']
   login_form.field_with(:name => "password").value = ENV['GW2_PASSWORD']
   search_page = @agent.submit login_form
-  Item.where(:updated_at => Time.new(0)..(Time.now - 10.minutes)).each do |item|
+  Item.find_each do |item|
     search_item(item)
   end
 end

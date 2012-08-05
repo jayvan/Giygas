@@ -21,7 +21,7 @@ class Recipe < ActiveRecord::Base
     end
 
     ItemsRecipes.where(:recipe_id => self.id).each do |itemrecipe|
-      puts "  #{itemrecipe.quantity}x #{itemrecipe.item.name} @ #{itemrecipe.item.buy_value} = #{itemrecipe.item.buy_value * itemrecipe.quantity}"
+      puts "  #{itemrecipe.quantity}x #{itemrecipe.item.name} @ #{itemrecipe.item.buy_value.to_i} = #{itemrecipe.item.buy_value.to_i * itemrecipe.quantity}"
     end
     
     puts "Net Value: #{self.profit_margin}"
