@@ -6,7 +6,5 @@ class CreateItems < ActiveRecord::Migration
       t.integer :sell_value
       t.timestamps
     end
-
-    add_index(:items, :name, :unique => :true)
   end
 end

@@ -29,23 +29,25 @@ end
 
 def parse_recipe(page, level_requirement)
   output_name = page.search(".db-description > .db-summary .db-title").text.gsub("[s]", "").strip
-  output_item = Item.where(:name => output_name).first_or_create!
-  recipe = Recipe.where(:item_id => output_item.id).first
+  rarity_name = page.search(".//dd[starts-with(@class,'gwitem-')]").text.strip
+  rarity = Rarity.where(:name => rarity_name).first_or_create!
+  profession_name = page.search("aside ul li a").text.strip
+  profession = Profession.where(:name => profession_name).first_or_create!
+  item_level = page.search(".//dd[@class='db-requiredLevel']").text.split(":").last.to_i
+  output_item = Item.where(:name => output_name, :rarity_id => rarity.id, :level => item_level).first_or_create!
+  recipe = Recipe.where(:item_id => output_item.id, :profession_id => profession.id).first
 
   if (recipe.present?)
     puts "Already know the recipe for: #{output_name}"
     return
   end
 
-  profession_name = page.search("aside ul li a").text.strip
-  profession = Profession.where(:name => profession_name).first_or_create!
-
   recipe = Recipe.create( :level => level_requirement,
                           :profession_id => profession.id,
                           :item_id => output_item.id)
 
   ingredients = page.search('.db-ingredient').map{|ingredient| parse_ingredient_name(ingredient.text.strip)}
-  puts "New level #{recipe.level} #{profession.name} recipe: #{recipe.item.name}"
+  puts "New level #{recipe.level} #{profession.name} recipe: #{recipe.item.name} lvl #{recipe.item.level} - #{recipe.item.rarity.name}"
   ingredients.each do |ingredient_data|
     ingredient = Item.where(:name => ingredient_data[:name]).first_or_create!
     ItemsRecipes.create(:recipe_id => recipe.id, :item_id => ingredient.id, :quantity => ingredient_data[:quantity])

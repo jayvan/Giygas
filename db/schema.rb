@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120804020735) do
+ActiveRecord::Schema.define(:version => 20120804164624) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -19,9 +19,11 @@ ActiveRecord::Schema.define(:version => 20120804020735) do
     t.integer  "sell_value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "rarity_id"
+    t.integer  "level"
   end
 
-  add_index "items", ["name"], :name => "index_items_on_name", :unique => true
+  add_index "items", ["name", "level", "rarity_id"], :name => "index_items_on_name_and_level_and_rarity_id", :unique => true
 
   create_table "items_recipes", :force => true do |t|
     t.integer  "item_id"
@@ -41,6 +43,15 @@ ActiveRecord::Schema.define(:version => 20120804020735) do
   end
 
   add_index "professions", ["name"], :name => "index_professions_on_name", :unique => true
+
+  create_table "rarities", :force => true do |t|
+    t.string   "name"
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "rarities", ["name"], :name => "index_rarities_on_name", :unique => true
 
   create_table "recipes", :force => true do |t|
     t.integer  "item_id"
