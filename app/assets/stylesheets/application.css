@@ -11,3 +11,73 @@
  *= require_self
  *= require_tree .
 */
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  /*background: url(https://d2vn94glaxzkz3.cloudfront.net/wp-content/uploads/wallpapers/GW2_GuardianWallpaper01-1920x1200.jpg) fixed;*/
+}
+.recipe {
+  background-color: #EEE;
+  margin-bottom: 5px;
+  min-height: 200px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.recipe img {
+  padding: 4px 7px;
+  width: 47px;
+  height: 41px;
+  float: left;
+  margin-top: 3px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAApCAYAAAClfnCxAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABShJREFUWMPNmWuIVVUUx39r733OvdeZcUYTHR/5SA11dFJ8oVjYgzDUMKGHjKZCBFFWWillBBWUhFp+KCgqLXtQkE+yh/YhrERI+lBBH0RRP2hQ5qRjkzruPpx1Z+69zjl3Gu/M3AULZvY+j9/Zd6//XnttaLMU0BvoC4SAAZz2hUAVEOj/otdmzWmbzWkLgV5AOue+NhMpbKnWdwIMByYo0xRgOlADjANm0Y5NBe4H1gMHRMyWVK/qRRU1tSPTlX0bjLEbRcyjIA8Cm4E9ImaTDdJzXZB+yBj7NiJvAo8ALwLvA5+DfAGyG+Rp4AHgSUReETGLQNYBG6N7ZLGIuVdEliOsFjFbENkMfApsAp4FngDuAMYWDojTB50EvIjxVX0GN/YbMu7vTNU1TdaF58XY8yAe8CDeGOvDTFVLuqKmKUxVemOcR9r6sy6S/RuPiBdjvbHZa3OuM9YbYz1ivBjrRYwXMd4Ydw5YCbwFzAQG6C+dZ/Vi3GLguBjra/qP8OmKPgpT6BGU6IuMDbwYUwBEu26y8IV9It6FmWgQctqsDZuBh4HZJFlFTS0uzOyKoFwsQJe5xH700pwYjGzQqOmtPqzuFoZPuJW+A69fIfEP6SIXj5i4/svAQmBYHnzdzIZWHz9rCUPH3pwOUr0+FroP3hjnrUt5Y4Ok65YDg1XBIps+f3Wrz1iwlrEz7hsHHDYaMF0NHgVlNqhJGvn5itymMpPnrGj1qfNWcd3EOZNF7CEbpLoFvoN+QVUm3+pmNbR6/ezlDBgxqVaM/dkF6RLCS1IgdsQvAwsoZoIMReSIMa4k8ILkS1/n/fFi7DUINyFyIjsXSzHqYmwp4D8pBp/WwDgmJRr5EvqujsCvAf60Lmx/Few531gMPgU8BTSKsdFyXz7w6zoCfxfwezYpKiP49cXg+wGPAQdFzNXKW6n95WLwQ4CVIrLDxCpEydSjMyMvSfADgA0iciKCb3/krQt99yduvA5kkuBrgT3A2ST4HvJ3dHBjrQp4D6TRBen/OT2kqz92N3BDEnw1sB2RJhdkOiGVXQq/HxiVBD8COAQ0R/O6rKRyv6phrI0EtgItiJSbVJ4E5iTBTwVWAz+VEXTW9+nqX5mk80uAvWUI/yHwAjAtDt4By4CjZQj/C7ATGBMHP0mrWp/1FGRegarNLwG/Aj9eUUHIscHAM8DhUsheZ5K7mJW7GfgeOJ2zEb/CemtN8FJUETNXtYMy1pUSfgfQAryaNG0OAU1Xu2kWMd66sFTT6Tzwhn7AxDj4McB3wLkyqBgUzvntwCpgYBz8aKABOPq/N+DSpYF8EdgGPA/0j4O/FqgDDvTo6nrlu/8FtgBrk+CHALcDX0WBJuUC/49uRpYVnL7kWaUenbwLcjEvzdUHipgcFZHu0v5TOp3X6PFOXhqcPW8apIqz1djAB2HGB6lKb13gM5V9fEV1rQ/CjHdhxrsg460Lo4MC49RLu4GJFCvw1oW/Ac8Brylrqw0F5gIbtLCzF/hSRCI4G0Rg1vkgzHjrgpzTjzZtjn6RwDut90gJAliM8VqtvqwK+Bdwd3sqs03hdwFndDX7CHgJ+AY4qEv0Pk2bP9BkaQfwreYePwBf5wzCMZ2vLcAf6k2qHhdUv5u17QzQCJxVyNPAKeAIcFwz3Z1xOi85R4n36ElEYdJWkRAw2WNL2470LgXGazxNA+ZpDrVI+xdrFXiZti/U3P1GPfkbXaxy0BPmVCQmALcB9SrVk3W/Wq8xOAW4U3OvVPbm/wAJf7qYyzwrEwAAAABJRU5ErkJggg==) no-repeat 0 0;
+}
+
+.recipe hr {
+  margin: 5px;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+.profitable {
+  background-color: #DFF0D8;
+  border: 1px solid #468847;
+}
+
+.not-profitable {
+  background-color: #F2DEDE;
+  border: 1px solid #B94A48;
+}
+
+.coins {
+
+}
+
+.coin {
+  width: 16px;
+  height: 17px;
+  background: url(https://duwhkb85nqihv.cloudfront.net/gw2/img/coins.1372851176.png) no-repeat;
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: -4px;
+}
+
+.coin.gold {
+  background-position: 0 -40px;
+}
+
+.coin.silver {
+  background-position: 0 -20px;
+}
+
+.coin.copper {
+  background-position: 0 0px;
+}
+
+.ingredient {
+  line-height: 20px;
+}

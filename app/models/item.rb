@@ -12,4 +12,8 @@ class Item < ActiveRecord::Base
 
     return query
   end
+
+  def real_sale_value
+    return (self.sell_value * 0.85).round
+  end
 end

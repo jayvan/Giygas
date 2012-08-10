@@ -3,6 +3,7 @@ class Recipe < ActiveRecord::Base
   has_and_belongs_to_many :items
   has_many :items_recipes, :dependent => :destroy
   belongs_to :item
+  belongs_to :profession
   belongs_to :rarity
 
   def self.profitable
@@ -11,6 +12,32 @@ class Recipe < ActiveRecord::Base
       profitable_recipes << recipe if recipe.profit_margin >= 0
     end
     return profitable_recipes
+  end
+
+  def self.valid
+    valid_recipes = []
+    Recipe.find_each do |recipe|
+      if recipe.item.sell_value == 0 # Output item can't be sold
+        next 
+      end
+      
+      valid = true
+
+      recipe.items.each do |ingredient|
+        if ingredient.buy_value == 0 # Ingredient can't be bought
+          valid = false
+          break
+        end
+      end
+
+      valid_recipes << recipe if valid
+    end
+
+    return valid_recipes
+  end
+
+  def items_recipes
+    ItemsRecipes.where(:recipe_id => self.id).includes(:item)
   end
 
   def print_costs
@@ -33,7 +60,7 @@ class Recipe < ActiveRecord::Base
       return 0
     end
 
-    profit_margin = item.sell_value
+    profit_margin = item.real_sale_value
 
     ItemsRecipes.where(:recipe_id => self.id).each do |itemrecipe|
       profit_margin -= itemrecipe.quantity * itemrecipe.item.buy_value

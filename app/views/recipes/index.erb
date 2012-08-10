@@ -1,0 +1,58 @@
+<div class="hero-unit">
+  <h1>Meet, Giygas</h1>
+  <p>Giygas watches the Guild Wars 2 market prices like a hawk. He carefully goes through all of the crafting recipes and calculates how much coin you stand to earn, or lose by crafting it! Put in your crafting levels and see what your most profitable recipes are.</p>
+  <div class='row'>
+    <% @professions.each do |profession| %>
+      <div class="span2">
+        <label for="<%= profession.name %>"><%= profession.name %></label>
+        <input type="text" value='250' class="span1" name="<%= profession.name %>" />
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class='row'>
+<% @recipes.each_with_index do |recipe, n| %>
+  <% profitable = recipe.profit_margin >= 0 %>
+  <div data-profession="<%= recipe.profession.name %>" data-level="<%= recipe.level %>" class="span5 recipe <%= profitable ? 'profitable' : 'not-profitable' %>">
+    <img src='https://dfach8bufmqqv.cloudfront.net/gw2/img/content/98f400f1.png' />
+    <h3><%= recipe.item.name %></h3>
+    <p><%= recipe.profession.name %> lvl <%= recipe.level %></p>
+    <div class='clearfix'></div>
+    <div>
+      <strong>Sale Value (adjusted for market fee):</strong>
+      <span class='pull-right'><%= render :partial => 'coins', :object => recipe.item.real_sale_value %></span>
+    </div>
+    <strong>Ingredients</strong>
+      <% recipe.items_recipes.each do |ingredient| %>
+        <div class='ingredient'>
+          <%= ingredient.quantity %>x
+          <%= ingredient.item.name %>
+          <span class='pull-right'>
+            <%= render :partial => 'coins', :object => ingredient.quantity * ingredient.item.buy_value %>
+          </span>
+        </div>
+      <% end %>
+    
+    <hr>
+    <strong>
+      <%= profitable ? "Profit" : "Loss" %>:
+      <span class='pull-right'>
+        <%= render :partial => 'coins', :object => recipe.profit_margin.abs %>
+      </span>
+    </strong>
+  </div>
+<% end %>
+</div>
+
+<script>
+$(function() {
+  $('input').change(function(input) {
+    var self = $(this)[0];
+    profession = self.name;
+    level = self.value;
+    $('')
+    console.log(self, profession, level);
+  });
+});
+</script>

@@ -1,0 +1,16 @@
+<span class='coins'>
+  <% gold = coins / 10000 %>
+  <% silver = (coins % 10000) / 100 %>
+  <% copper = coins % 100 %>
+  <% unless gold == 0 %>
+    <%= gold %>
+    <span class='coin gold'></span>
+  <% end %>
+
+  <% unless silver == 0 and gold == 0 %>
+    <%= silver %>
+    <span class='coin silver'></span>
+  <% end %>
+  <%= copper %>
+  <span class='coin copper'></span>
+</span>
