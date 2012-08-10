@@ -9,7 +9,7 @@ end
 
 def crawl_prices
   @agent = Mechanize.new
-  page = @agent.get('https://tradingpost-live.ncplatform.net/login')
+  page = @agent.get('https://account.guildwars2.com/login?redirect_uri=http://tradingpost-live.ncplatform.net/authenticate')
   login_form = page.form_with :class => "login-panel"
   login_form.field_with(:name => "email").value = ENV['GW2_EMAIL']
   login_form.field_with(:name => "password").value = ENV['GW2_PASSWORD']
