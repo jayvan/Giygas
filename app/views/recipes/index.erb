@@ -1,14 +1,16 @@
 <div class="hero-unit">
   <h1>Meet, Giygas</h1>
-  <p>Giygas watches the Guild Wars 2 market prices like a hawk. He carefully goes through all of the crafting recipes and calculates how much coin you stand to earn, or lose by crafting it! Put in your crafting levels and see what your most profitable recipes are.</p>
-  <div class='row'>
+  <p>Giygas watches the Guild Wars 2 market prices like a hawk. He carefully goes through all of the crafting recipes and calculates how much coin you stand to earn, or lose by crafting it! This is still a work in progress, however everything should be good to go for release!</p>
+  <p><em>Only recipes whose ingredients are immedietly available on the market, and whose output is immedietly sellable on the market are shown below.</em></p>
+  <p><em>Last updated: <%= Item.first.updated_at.strftime("%b %d, %H:%M") %></em></p>
+  <!-- <div class='row'>
     <% @professions.each do |profession| %>
       <div class="span2">
         <label for="<%= profession.name %>"><%= profession.name %></label>
         <input type="text" value='250' class="span1" name="<%= profession.name %>" />
       </div>
     <% end %>
-  </div>
+  </div> -->
 </div>
 
 <div class='row'>

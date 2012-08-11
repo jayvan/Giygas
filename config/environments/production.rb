@@ -20,6 +20,12 @@ Giygas::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  config.action_dispatch.rack_cache = {
+    :metastore    => Dalli::Client.new,
+    :entitystore  => 'file:tmp/cache/rack/body',
+    :allow_reload => false
+  }
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 

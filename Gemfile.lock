@@ -37,6 +37,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    dalli (2.1.0)
     domain_name (0.5.3)
       unf (~> 0.0.3)
     erubis (2.7.0)
@@ -123,6 +124,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  dalli
   jquery-rails
   mechanize
   pg

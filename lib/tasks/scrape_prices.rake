@@ -17,6 +17,7 @@ def crawl_prices
   Item.find_each do |item|
     search_item(item)
   end
+  ApplicationController.expire_page :controller => "recipes", :action => "index"
 end
 
 def search_item(item)
