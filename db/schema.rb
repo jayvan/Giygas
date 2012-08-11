@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120804164624) do
+ActiveRecord::Schema.define(:version => 20120811020030) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120804164624) do
     t.datetime "updated_at", :null => false
     t.integer  "rarity_id"
     t.integer  "level"
+    t.string   "image_url"
   end
 
   add_index "items", ["name", "level", "rarity_id"], :name => "index_items_on_name_and_level_and_rarity_id", :unique => true

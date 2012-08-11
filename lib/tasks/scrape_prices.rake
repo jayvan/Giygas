@@ -32,6 +32,7 @@ def search_item(item)
     item_data = json['results'][0]
     item.sell_value = item_data['max_offer_unit_price']
     item.buy_value = item_data['min_sale_unit_price']
+    item.image_url = item_data['img']
     item.save
     puts " Purchase for #{item.buy_value} -- Sell for #{item.sell_value}"
   end
