@@ -1,9 +1,21 @@
 <div class="hero-unit">
   <h1>Meet, Giygas</h1>
-  <p>Giygas watches the Guild Wars 2 market prices like a hawk. He carefully goes through all of the crafting recipes and calculates how much coin you stand to earn, or lose by crafting it! This is still a work in progress, however everything should be good to go for release!</p>
-  <p><em>Only recipes whose ingredients are immedietly available on the market, and whose output is immedietly sellable on the market are shown below.</em></p>
+  <p>Giygas watches the Guild Wars 2 market prices like a hawk. He carefully goes through all of the crafting recipes and calculates how much coin you stand to earn, or lose by crafting it!</p>
+</div>
+<div class='well'>
+  <h2>Crafting Levels</h2>
+  <div class='row'>
+    <% @professions.each do |profession| %>
+      <div class="span2">
+        <label for="<%= profession.name %>"><%= profession.name %></label>
+        <input type="text" value='0' class="span1" name="<%= profession.name %>" />
+      </div>
+    <% end %>
+  </div>
+  <p>Tell Giygas your crafting levels so that you only see the relevant recipes! If you haven't learned a profession you can use the level "-1" to hide all recipes for it, including the level 0 recipes.</p>
+  <p><em>Only recipes whose ingredients are immediately available on the market, and whose output is immedietly sellable on the market are shown below.</em></p>
   <p>
-    <em>
+    <strong>
       <% seconds_since_update = Time.zone.now.to_i - Item.first.updated_at.to_i %>
       <% hours_since_update = seconds_since_update / 1.hour %>
       <% minutes_since_update = (seconds_since_update - hours_since_update * 1.hour) / 1.minute %>
@@ -12,16 +24,8 @@
       <%= pluralize(hours_since_update, "hour") + "," if hours_since_update != 0 %>
       <%= pluralize(minutes_since_update, "minute") + "," if hours_since_update != 0 || minutes_since_update != 0 %>
       <%= pluralize(seconds_since_update, "second") %> ago
-    </em>
+    </strong>
   </p>
-  <!-- <div class='row'>
-    <% @professions.each do |profession| %>
-      <div class="span2">
-        <label for="<%= profession.name %>"><%= profession.name %></label>
-        <input type="text" value='250' class="span1" name="<%= profession.name %>" />
-      </div>
-    <% end %>
-  </div> -->
 </div>
 <% cache do %>
   <div class='row'>
@@ -58,13 +62,37 @@
   </div>
 
   <script>
+  var updateRecipes = function(profession, level) {
+      recipes = $('div[data-profession="' + profession + '"]');
+      recipes.each(function() {
+        var self = $(this);
+        if (self.data('level') > level) {
+          self.hide();
+        } else {
+          self.show();
+        }
+      });
+    };
   $(function() {
+    
+
     $('input').change(function(input) {
       var self = $(this)[0];
       profession = self.name;
       level = self.value;
-      $('')
-      console.log(self, profession, level);
+      localStorage.setItem(profession + "_level", level);
+      updateRecipes(profession, level);
+    });
+
+    $('input').each(function() {
+      var self = $(this);
+      var profession = self.attr('name');
+      var level = localStorage.getItem(profession + "_level");
+      if (level == null) {
+        level = 0;
+      }
+      self.attr('value', level);
+      updateRecipes(profession, level);
     });
   });
   </script>
