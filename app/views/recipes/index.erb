@@ -28,6 +28,7 @@
   </p>
 </div>
 <% cache do %>
+  <% @recipes = Recipe.valid.sort_by{|r| -r.profit_margin} %>
   <div class='row'>
   <% @recipes.each_with_index do |recipe, n| %>
     <% profitable = recipe.profit_margin >= 0 %>
