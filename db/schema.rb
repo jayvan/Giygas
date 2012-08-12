@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120811020030) do
+ActiveRecord::Schema.define(:version => 20120812172800) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.integer  "buy_value"
-    t.integer  "sell_value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "buy_value",  :default => 0
+    t.integer  "sell_value", :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "rarity_id"
     t.integer  "level"
     t.string   "image_url"
