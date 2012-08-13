@@ -17,7 +17,7 @@ def crawl_prices
   Item.find_each do |item|
     search_item(item)
   end
-  ActionController::Base.new.expire_fragment("/recipes")
+  Rails.cache.clear
 end
 
 def search_item(item)
