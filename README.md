@@ -1,8 +1,10 @@
-== Giygas
+Giygas
+======
 
 Giygas is a web based application that crawls a Guild Wars 2 database and the Guild Wars 2 market and displays profitable crafting recipes.
 
-== Setup
+Setup
+=====
 
 1. Clone this repository
 
@@ -14,12 +16,15 @@ Giygas is a web based application that crawls a Guild Wars 2 database and the Gu
 
 5. run `rails server` to launch the server
 
-== Crawling data
+Crawling data
+=============
 
-= Recipes
+Recipes
+-------
 
 Run `rake scrape_recipes` to fetch all of the recipes
 
-= Prices
+Prices
+------
 
 Set your GW2_EMAIL and GW2_PASSWORD environment variables to your Guild Wars 2 email and password respectively. Then run `rake scrape_prices`.
