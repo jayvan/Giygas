@@ -27,7 +27,6 @@ def search_item(item)
   if json['results'].empty?
     item.sell_value = 0
     item.buy_value = 0
-    item.touch
     item.save
     puts " Not available on the marketplace"
   else
@@ -38,4 +37,5 @@ def search_item(item)
     item.save
     puts " Purchase for #{item.buy_value} -- Sell for #{item.sell_value}"
   end
+  item.touch
 end
