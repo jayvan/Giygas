@@ -1,0 +1,7 @@
+<div class='ingredient'>
+  <%= ingredient.quantity %>x
+  <%= ingredient.item.name %>
+  <span class='pull-right'>
+    <%= render :partial => 'coins', :object => ingredient.quantity * ingredient.item.buy_value %>
+  </span>
+</div>

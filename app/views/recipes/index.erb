@@ -1,100 +1,13 @@
-<div class="hero-unit">
-  <h1>Meet, Giygas</h1>
-  <p>Giygas watches the Guild Wars 2 market prices like a hawk. He carefully goes through all of the crafting recipes and calculates how much coin you stand to earn, or lose by crafting it!</p>
-</div>
+<%= render "header" %>
+
 <div class='well'>
-  <h2>Crafting Levels</h2>
-  <div class='row'>
-    <% @professions.each do |profession| %>
-      <div class="span2">
-        <label for="<%= profession.name %>"><%= profession.name %></label>
-        <input type="text" value='0' class="span1" name="<%= profession.name %>" />
-      </div>
-    <% end %>
-  </div>
-  <p>Tell Giygas your crafting levels so that you only see the relevant recipes! If you haven't learned a profession you can use the level "-1" to hide all recipes for it, including the level 0 recipes.</p>
+  <%= render "crafting_prompt" %>
   <p><em>Only recipes whose ingredients are immediately available on the market, and whose output is immedietly sellable on the market are shown below.</em></p>
-  <p>
-    <strong>
-      <% seconds_since_update = Time.zone.now.to_i - Item.first.updated_at.to_i %>
-      <% hours_since_update = seconds_since_update / 1.hour %>
-      <% minutes_since_update = (seconds_since_update - hours_since_update * 1.hour) / 1.minute %>
-      <% seconds_since_update = seconds_since_update % 1.minute %>
-      Last updated:
-      <%= pluralize(hours_since_update, "hour") + "," if hours_since_update != 0 %>
-      <%= pluralize(minutes_since_update, "minute") + "," if hours_since_update != 0 || minutes_since_update != 0 %>
-      <%= pluralize(seconds_since_update, "second") %> ago
-    </strong>
-  </p>
+  <%= render "updated_at" %>
 </div>
 <% cache do %>
   <% @recipes = Recipe.valid.sort_by{|r| -r.profit_margin} %>
   <div class='row'>
-  <% @recipes.each_with_index do |recipe, n| %>
-    <% profitable = recipe.profit_margin >= 0 %>
-    <div data-profession="<%= recipe.profession.name %>" data-level="<%= recipe.level %>" class="span5 recipe <%= profitable ? 'profitable' : 'not-profitable' %>">
-      <img src='<%= recipe.item.image_url %>' />
-      <h3><%= recipe.item.name %></h3>
-      <p><%= recipe.profession.name %> lvl <%= recipe.level %></p>
-      <div class='clearfix'></div>
-      <div>
-        <strong>Sale Value (adjusted for market fee):</strong>
-        <span class='pull-right'><%= render :partial => 'coins', :object => recipe.item.real_sale_value %></span>
-      </div>
-      <strong>Ingredients</strong>
-        <% recipe.items_recipes.each do |ingredient| %>
-          <div class='ingredient'>
-            <%= ingredient.quantity %>x
-            <%= ingredient.item.name %>
-            <span class='pull-right'>
-              <%= render :partial => 'coins', :object => ingredient.quantity * ingredient.item.buy_value %>
-            </span>
-          </div>
-        <% end %>
-      <hr>
-      <strong>
-        <%= profitable ? "Profit" : "Loss" %>:
-        <span class='pull-right'>
-          <%= render :partial => 'coins', :object => recipe.profit_margin.abs %>
-        </span>
-      </strong>
-    </div>
-  <% end %>
+    <%= render @recipes %>
   </div>
-
-  <script>
-  var updateRecipes = function(profession, level) {
-      recipes = $('div[data-profession="' + profession + '"]');
-      recipes.each(function() {
-        var self = $(this);
-        if (self.data('level') > level) {
-          self.hide();
-        } else {
-          self.show();
-        }
-      });
-    };
-  $(function() {
-    
-
-    $('input').change(function(input) {
-      var self = $(this)[0];
-      profession = self.name;
-      level = self.value;
-      localStorage.setItem(profession + "_level", level);
-      updateRecipes(profession, level);
-    });
-
-    $('input').each(function() {
-      var self = $(this);
-      var profession = self.attr('name');
-      var level = localStorage.getItem(profession + "_level");
-      if (level == null) {
-        level = 0;
-      }
-      self.attr('value', level);
-      updateRecipes(profession, level);
-    });
-  });
-  </script>
 <% end %>

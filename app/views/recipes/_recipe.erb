@@ -1,0 +1,22 @@
+<% profitable = recipe.profit_margin >= 0 %>
+<div data-profession="<%= recipe.profession.name %>" data-level="<%= recipe.level %>" class="span5 recipe <%= profitable ? 'profitable' : 'not-profitable' %>">
+  <img src='<%= recipe.item.image_url %>' />
+  <h3><%= recipe.item.name %></h3>
+  <p><%= recipe.profession.name %> lvl <%= recipe.level %></p>
+  <div class='clearfix'></div>
+  <div>
+    <strong>Sale Value (adjusted for market fee):</strong>
+    <span class='pull-right'><%= render :partial => 'coins', :object => recipe.item.real_sale_value %></span>
+  </div>
+  <strong>Ingredients</strong>
+    <% recipe.items_recipes.each do |ingredient| %>
+      <%= render :partial => "ingredient", :object => ingredient %>
+    <% end %>
+  <hr>
+  <strong>
+    <%= profitable ? "Profit" : "Loss" %>:
+    <span class='pull-right'>
+      <%= render :partial => 'coins', :object => recipe.profit_margin.abs %>
+    </span>
+  </strong>
+</div>

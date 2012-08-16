@@ -1,0 +1,12 @@
+<p>
+  <strong>
+    <% seconds_since_update = Time.zone.now.to_i - Item.first.updated_at.to_i %>
+    <% hours_since_update = seconds_since_update / 1.hour %>
+    <% minutes_since_update = (seconds_since_update - hours_since_update * 1.hour) / 1.minute %>
+    <% seconds_since_update = seconds_since_update % 1.minute %>
+    Last updated:
+    <%= pluralize(hours_since_update, "hour") + "," if hours_since_update != 0 %>
+    <%= pluralize(minutes_since_update, "minute") + "," if hours_since_update != 0 || minutes_since_update != 0 %>
+    <%= pluralize(seconds_since_update, "second") %> ago
+  </strong>
+</p>

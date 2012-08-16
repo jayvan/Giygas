@@ -1,0 +1,10 @@
+<h2>Crafting Levels</h2>
+<div class='row'>
+  <% @professions.each do |profession| %>
+    <div class="span2">
+      <label for="<%= profession.name %>"><%= profession.name %></label>
+      <input type="text" value='0' class="span1" name="<%= profession.name %>" />
+    </div>
+  <% end %>
+</div>
+<p>Tell Giygas your crafting levels so that you only see the relevant recipes! If you haven't learned a profession you can use the level "-1" to hide all recipes for it, including the level 0 recipes.</p>
