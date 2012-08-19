@@ -1,12 +1,24 @@
 <p>
-  <strong>
-    <% seconds_since_update = Time.zone.now.to_i - Item.first.updated_at.to_i %>
-    <% hours_since_update = seconds_since_update / 1.hour %>
-    <% minutes_since_update = (seconds_since_update - hours_since_update * 1.hour) / 1.minute %>
-    <% seconds_since_update = seconds_since_update % 1.minute %>
-    Last updated:
-    <%= pluralize(hours_since_update, "hour") + "," if hours_since_update != 0 %>
-    <%= pluralize(minutes_since_update, "minute") + "," if hours_since_update != 0 || minutes_since_update != 0 %>
-    <%= pluralize(seconds_since_update, "second") %> ago
-  </strong>
+    <strong>
+        <% seconds_since_update = Time.zone.now.to_i - Item.first.updated_at.to_i %>
+        <% hours_since_update = seconds_since_update / 1.hour %>
+        <% minutes_since_update = (seconds_since_update - hours_since_update * 1.hour) / 1.minute %>
+        <% seconds_since_update = seconds_since_update % 1.minute %>
+        Last updated:
+        <span id='hours_since_update' style="<%= 'display: none;' if hours_since_update == 0 %>">
+            <span class='value'><%= hours_since_update %></span>
+            hour<span class='plural'>s</span>
+        </span>
+
+        <span id='minutes_since_update' style="<%= 'display: none;' if hours_since_update == 0 && minutes_since_update == 0 %>">
+            <span class='value'><%= minutes_since_update %></span>
+            minute<span class='plural'>s</span>
+        </span>
+
+        <span id='seconds_since_update'>
+            <span class='value'><%= seconds_since_update %></span>
+            second<span class='plural'>s</span>
+        </span>
+        ago
+    </strong>
 </p>
