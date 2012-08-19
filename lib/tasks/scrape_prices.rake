@@ -24,18 +24,18 @@ def search_item(item)
   print "Crawling for #{item.name}..."
   response = @agent.get(item.api_url)
   json = JSON.parse(response.body)
-  if json['results'].empty?
+  if json['results'].empty? || json['results'][0]['name'] != item.name
     item.sell_value = 0
     item.buy_value = 0
     item.save
-    puts " Not available on the marketplace"
+    puts "Not available on the marketplace"
   else
     item_data = json['results'][0]
     item.sell_value = item_data['max_offer_unit_price']
     item.buy_value = item_data['min_sale_unit_price']
     item.image_url = item_data['img']
     item.save
-    puts " Purchase for #{item.buy_value} -- Sell for #{item.sell_value}"
+    puts "Purchase for #{item.buy_value} -- Sell for #{item.sell_value}"
   end
   item.touch
 end
