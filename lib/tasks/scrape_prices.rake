@@ -14,8 +14,21 @@ def crawl_prices
   login_form.field_with(:name => "email").value = ENV['GW2_EMAIL']
   login_form.field_with(:name => "password").value = ENV['GW2_PASSWORD']
   search_page = @agent.submit login_form
+  error_count = 0
   Item.find_each do |item|
-    search_item(item)
+    begin
+      search_item(item)
+    rescue Exception => e
+      item.sell_value = 0;
+      item.buy_value = 0;
+      item.save
+      puts e.message
+      error_count += 1
+      if error_count == 100
+        puts "Abandoning Crawl"
+        return
+      end
+    end
   end
   Rails.cache.clear
 end
