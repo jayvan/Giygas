@@ -54,10 +54,6 @@ body {
   border: 1px solid #B94A48;
 }
 
-.coins {
-
-}
-
 .coin {
   width: 16px;
   height: 17px;
@@ -81,4 +77,30 @@ body {
 
 .ingredient {
   line-height: 20px;
+}
+
+/*Rarities*/
+
+.rarity-1 {
+
+}
+
+.rarity-2 {
+  color: #4F9DFE;
+}
+
+.rarity-3 {
+  color: #2DC50E;
+}
+
+.rarity-4 {
+  color: #C90;
+}
+
+.rarity-5 {
+  color: #FDA500;
+}
+
+.rarity-6 {
+  color: #D22;
 }

@@ -1,7 +1,7 @@
 <% profitable = recipe.profit_margin >= 0 %>
 <div data-profession="<%= recipe.profession.name %>" data-level="<%= recipe.level %>" class="span5 recipe <%= profitable ? 'profitable' : 'not-profitable' %>">
   <img src='<%= recipe.item.image_url %>' />
-  <h3><%= recipe.item.name %></h3>
+  <h3 class='rarity-<%= recipe.item.rarity.value %>'><%= recipe.item.name %></h3>
   <p><%= recipe.profession.name %> lvl <%= recipe.level %></p>
   <div class='clearfix'></div>
   <div>

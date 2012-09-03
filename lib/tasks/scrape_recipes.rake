@@ -11,6 +11,7 @@ def start_crawl
   
   loop do
     page = @agent.get(recipe_page_url % page_number)
+    puts "Fetching page \##{page_number}"
     break if page.search(".alert.no-results").any?
     parse_recipe_list(page)
     page_number += 1
@@ -29,7 +30,7 @@ end
 
 def parse_recipe(page, level_requirement)
   output_name = page.search("#tab-creates .t").text.gsub("[s]", "").strip
-  rarity_name = page.search(".//dd[starts-with(@class,'gwitem-')]").text.strip
+  rarity_name = page.search("#tab-creates .gwitem").attribute('class').value.split(' ')[1].split('-').last
   rarity = Rarity.where(:name => rarity_name).first_or_create!
   profession_name = page.search("aside ul li a").text.strip
   profession = Profession.where(:name => profession_name).first_or_create!
@@ -47,7 +48,7 @@ def parse_recipe(page, level_requirement)
                           :item_id => output_item.id)
 
   ingredients = page.search('.db-ingredient').map{|ingredient| parse_ingredient_name(ingredient.text.strip)}
-  puts "New level #{recipe.level} #{profession.name} recipe: #{recipe.item.name} lvl #{recipe.item.level} - #{recipe.item.rarity.name}"
+  puts "New level #{recipe.level} #{profession.name} recipe: #{recipe.item.name} lvl #{recipe.item.level} - #{recipe.item.rarity.name}(#{recipe.item.rarity.value})"
   ingredients.each do |ingredient_data|
     ingredient = Item.where(:name => ingredient_data[:name]).first_or_create!
     ItemsRecipes.create(:recipe_id => recipe.id, :item_id => ingredient.id, :quantity => ingredient_data[:quantity])
