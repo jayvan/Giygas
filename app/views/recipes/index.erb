@@ -6,7 +6,7 @@
   <%= render "updated_at" %>
 </div>
 <% cache do %>
-  <% @recipes = Recipe.valid.sort_by{|r| -r.profit_margin} %>
+  <% @recipes = Recipe.valid.sort_by{|r| -r.profit_margin}.first(100) %>
   <div class='row'>
     <%= render @recipes %>
   </div>
