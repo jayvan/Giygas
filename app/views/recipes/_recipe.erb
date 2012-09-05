@@ -12,11 +12,14 @@
     <% recipe.items_recipes.each do |ingredient| %>
       <%= render :partial => "ingredient", :object => ingredient %>
     <% end %>
-  <hr>
-  <strong>
-    <%= profitable ? "Profit" : "Loss" %>:
-    <span class='pull-right'>
-      <%= render :partial => 'coins', :object => recipe.profit_margin.abs %>
-    </span>
-  </strong>
+  <div class='clearfix'></div>
+  <div class='sum'>
+    <hr>
+    <strong>
+      <%= profitable ? "Profit" : "Loss" %>:
+      <span class='pull-right'>
+        <%= render :partial => 'coins', :object => recipe.profit_margin.abs %>
+      </span>
+    </strong>
+  </div>
 </div>
