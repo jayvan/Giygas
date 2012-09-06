@@ -74,7 +74,7 @@ $(function() {
     var profession = self.attr('name');
     var level = localStorage.getItem(profession + "_level");
     if (level === null) {
-      level = 0;
+      level = 400;
     }
     self.attr('value', level);
     updateRecipes(profession, level);
