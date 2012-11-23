@@ -19,6 +19,8 @@ Setup
 Crawling data
 =============
 
+Note: I developed this quite a while ago, and while it worked very well, I prefer doing dungeons with friends to make gold instead of crafting. The APIs for the marketplace may have changed, so these instructions may or may not be successfull for you. If you do find you have to tweak the scrape scripts, please send a pull request so that others can scrape easily!
+
 Recipes
 -------
 
